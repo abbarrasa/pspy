@@ -1,6 +1,9 @@
 from setuptools import find_packages, setup
 
 
+__version__ = '0.0.1'
+
+
 def get_readme():
     readme = ''
     try:
@@ -14,7 +17,7 @@ def get_readme():
 
 setup(
     name='pspy',
-    version='0.0.1',
+    version=__version__,
     author='Alberto Buitrago Barrasa',
     author_email='abbarrasa@gmail.com',
     description=('A ISO games manager for PSP.'),
