@@ -1,2 +1,2 @@
-# pspy
+# PSPy
 ISO games manager for PSP
