@@ -19,8 +19,8 @@ setup(
     author_email='abbarrasa@gmail.com',
     description=('A ISO games manager for PSP.'),
     long_description=get_readme(),
-    license='BSD',
-    keywords='PSP games manager',
+    license='GPLv3',
+    keywords=["PSP", "games", "manager", "pspy"],    
     url='https://github.com/abbarrasa/pspy',
     packages=find_packages(),
     package_data={
@@ -28,9 +28,11 @@ setup(
     },
     install_requires=['markdown==2.6.5'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Utilities'
+        "Development Status :: 1 - Alpha",
+        "License :: OSI Approved :: GNU General Public License v3",
+        "Operating System :: POSIX :: Linux",        
+        "Programming Language :: Python",
+        "Programming Language :: MongoDB",
+        "Topic :: Utilities"
     ]
 )
