@@ -13,7 +13,7 @@ def get_readme():
 
 
 setup(
-    name='PSPy',
+    name='pspy',
     version='0.0.1',
     author='Alberto Buitrago Barrasa',
     author_email='abbarrasa@gmail.com',
