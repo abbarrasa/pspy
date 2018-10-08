@@ -1,7 +1,7 @@
 from sqlobject import *
 
 
-class Database:	
+class Database(SQLObject):	
 	def connect(path_to_db):
 		#Create and open connection to a database file.
 		sqlhub.processConnection = connectionForURI('sqlite3:'+path_to_db)
