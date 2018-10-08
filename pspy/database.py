@@ -1,15 +1,16 @@
-import sqlite3
+from sqlobject import *
 
 
-class Database:
-	
+class Database:	
+	def connect(path_to_db):
+		#Create and open connection to a database file.
+		sqlhub.processConnection = connectionForURI('sqlite3:'+path_to_db)
+ 				
 	def createTables():
 		for table in (Game):
 			table.createTable(ifNotExists=True)
-
-	def connect(database):
-		try:
-			bd = sqlite3.connect(database)
-			cursor = bd.cursor()
-			print("Connected to database successfuly")
-		except 
+			
+	def close():
+		#close connection
+		sqlhub.processConnection.close()		
+		
