@@ -1,16 +1,19 @@
 from sqlobject import *
+import os
 
 
 class Database(SQLObject):	
-	def connect(path_to_db):
+	def connect(self, db_filename):
+		path_to_db = os.path.abspath(db_filename)		
+		uri = 'sqlite3:{0}'.format(path_to_db)
 		#Create and open connection to a database file.
-		sqlhub.processConnection = connectionForURI('sqlite3:'+path_to_db)
+		sqlhub.processConnection = connectionForURI(uri)
  				
-	def createTables():
-		for table in (Game):
-			table.createTable(ifNotExists=True)
+	def createTables(self):
+		for entity in (Game):
+			entity.createTable(ifNotExists=True)
 			
-	def close():
+	def close(self):
 		#close connection
-		sqlhub.processConnection.close()		
+		sqlhub.processConnection.close()
 		
