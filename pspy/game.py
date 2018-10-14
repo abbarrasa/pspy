@@ -7,14 +7,20 @@ class Game(SQLObject):
 	title = StringCol(length=255, unique=True)
 	description = StringCol(length=511, default=None)
 	comment = StringCol(default=None)
-	format = EnumCol(['ISO', 'CSO', 'Eboot'])
+	#format = EnumCol(['ISO', 'CSO', 'Eboot'])
 	size = IntCol()
 	path = StringCol()
-	cover = BlobCol(default=None)
+	cover = StringCol(default=None)
 	
 	def humanReadableSize(n, pow=0, b=1024, u='B', pre=['']+[p+'i'for p in'KMGTPEZY']):
 		pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
-		return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)	
+		return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
+
+#	def _set_cover(self, value):
+#        self._SO_set_cover(value.encode('base64'))
+
+#    def _get_cover(self, value):
+#        return self._SO_get_cover().decode('base64')		
 		
 #    def imageFilename(self):
 #        return 'covers/game-%s.jpg' % self.id
