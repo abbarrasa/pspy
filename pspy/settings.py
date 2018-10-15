@@ -31,7 +31,7 @@ class Settings(object):
 			sample_config = f.read()
 			config = ConfigParser.RawConfigParser(allow_no_value=True)
 			config.readfp(io.BytesIO(sample_config))
-			
+			return config			
 			# List all contents
 			#print("List all contents")
 			#for section in config.sections():
@@ -44,7 +44,7 @@ class Settings(object):
             # Print some contents
             #print("\nPrint some contents")
             #print(config.get('other', 'use_anonymous'))  # Just get the value
-            #print(config.getboolean('other', 'use_anonymous'))  # You know the datatype?	
+            #print(config.getboolean('other', 'use_anonymous'))  # You know the datatype?
 	
 	def write(self, d):
 		path_to_config = os.path.expanduser(self.config_filename)

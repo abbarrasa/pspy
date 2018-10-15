@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 #  main.py
@@ -22,14 +22,21 @@
 #
 #
 
-from pspy import Database
+from pspy import Settings, Database, Game
 
 
 def main(args):
-    Database.connect('store.db')
-    Database.createTables()
-    g = Game(title='Grand Thief Auto Liberty City',description='GTA Liberty City',size=1123,path='ISOS/GTA.zip')
-    Database.close()
+    settings = Settings()
+    
+    db_filename = settings.read().get('Database', 'file')
+    print("El fichero es: " + db_filename)
+    database = Database()
+    database.connect(db_filename)
+    database.createTables()
+    g = Game(title='Grand Thief Auto Liberty City11',description='GTA Liberty City',size=48306354,path='ISOS/GTA.zip')
+    size = g.humanReadableSize()
+    print("El tamano es: " + size)
+    database.close()
 
 if __name__ == '__main__':
     import sys

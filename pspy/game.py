@@ -1,6 +1,7 @@
 from sqlobject import *
-from math import log
+#from math import log
 #import os
+import humanize
 
 
 class Game(SQLObject):
@@ -12,9 +13,8 @@ class Game(SQLObject):
 	path = StringCol()
 	cover = StringCol(default=None)
 	
-	def humanReadableSize(n, pow=0, b=1024, u='B', pre=['']+[p+'i'for p in'KMGTPEZY']):
-		pow,n=min(int(log(max(n*b**pow,1),b)),len(pre)-1),n*b**pow
-		return "%%.%if %%s%%s"%abs(pow%(-pow-1))%(n/b**float(pow),pre[pow],u)
+	def humanReadableSize(self, binary=False, gnu=False):
+		return humanize.naturalsize(self.size)
 
 #	def _set_cover(self, value):
 #        self._SO_set_cover(value.encode('base64'))
