@@ -22,11 +22,11 @@
 #
 #
 
-from pspy import Database
-
+from pspy import Database, Settings
 
 def main(args):
-    Database.connect('store.db')
+    config = Settings.read()
+    Database.connect(config.get('Database', 'file'))
     Database.createTables()
     g = Game(title='Grand Thief Auto Liberty City',description='GTA Liberty City',size=1123,path='ISOS/GTA.zip')
     Database.close()
