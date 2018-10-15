@@ -8,10 +8,17 @@ class Game(SQLObject):
 	title = StringCol(length=255, unique=True)
 	description = StringCol(length=511, default=None)
 	comment = StringCol(default=None)
-	#format = EnumCol(['ISO', 'CSO', 'Eboot'])
+	cover = StringCol(default=None)	
+	format = StringCol(length=15)
 	size = IntCol()
 	path = StringCol()
-	cover = StringCol(default=None)
+	
+	def _set_format(self, value):
+		if value in ['ISO', 'CSO', 'Eboot']:
+			self._SO_set_format(value)
+		else:
+			raise ValueError(
+			'{0} is not a valid format'.format(value))
 	
 	def humanReadableSize(self, binary=False, gnu=False):
 		return humanize.naturalsize(self.size)

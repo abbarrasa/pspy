@@ -33,7 +33,7 @@ def main(args):
     database = Database()
     database.connect(db_filename)
     database.createTables()
-    g = Game(title='Grand Thief Auto Liberty City11',description='GTA Liberty City',size=48306354,path='ISOS/GTA.zip')
+    g = Game(title='Grand Thief Auto Liberty City1',description='GTA Liberty City',size=48306354,format='CSO',path='ISOS/GTA.zip')
     size = g.humanReadableSize()
     print("El tamano es: " + size)
     database.close()
