@@ -7,29 +7,30 @@ assert (sys.maxsize & (sys.maxsize+1)) == 0 # checks that maxsize+1 is a power o
 
 
 class Game(SQLObject):
-	title = StringCol(length=255, unique=True)
-	description = StringCol(length=511, default=None)
-	comment = StringCol(default=None)
-	cover = BLOBCol(default=None)	
-	format = StringCol(length=15)
-	size = IntCol()
-	path = StringCol()
-		
-	def _set_format(self, value):
-		if value in ['ISO', 'CSO', 'Eboot']:
-			self._SO_set_format(value)
-		else:
-			raise ValueError(
-			'{0} is not a valid format'.format(value))
-	
-	def humanReadableSize(self, binary=False, gnu=False):
-		return humanize.naturalsize(self.size)
-		
-	def __hash__(self):
-		if self.id == None:
-			raise ValueError('It cannot be hashed')
-		else:
-			return hash((self.id, self.title)) & sys.maxsize
+    title = StringCol(length=255, unique=True)
+    description = StringCol(length=511, default=None)
+    comment = StringCol(default=None)
+    cover = BLOBCol(default=None)
+    format = StringCol(length=15)
+    size = IntCol()
+    path = StringCol()
+
+    def humanReadableSize(self, binary=False, gnu=False):
+        return humanize.naturalsize(self.size)
+
+    def _set_format(self, value):
+        if value in ['ISO', 'CSO', 'Eboot']:
+            self._SO_set_format(value)
+        else:
+            raise ValueError(
+                '{0} is not a valid format'.format(value)
+            )
+
+    def __hash__(self):
+        if self.id is None:
+            raise ValueError('It cannot be hashed because it has not id')
+        else:
+            return hash((self.id, self.title)) & sys.maxsize
 
 #	def _set_cover(self, value):
 #        self._SO_set_cover(value.encode('base64'))
