@@ -8,7 +8,7 @@ class Game(SQLObject):
 	title = StringCol(length=255, unique=True)
 	description = StringCol(length=511, default=None)
 	comment = StringCol(default=None)
-	cover = StringCol(default=None)	
+	cover = BLOBCol(default=None)	
 	format = StringCol(length=15)
 	size = IntCol()
 	path = StringCol()
