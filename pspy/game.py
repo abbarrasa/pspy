@@ -12,7 +12,7 @@ class Game(SQLObject):
 	format = StringCol(length=15)
 	size = IntCol()
 	path = StringCol()
-	
+		
 	def _set_format(self, value):
 		if value in ['ISO', 'CSO', 'Eboot']:
 			self._SO_set_format(value)
@@ -22,6 +22,13 @@ class Game(SQLObject):
 	
 	def humanReadableSize(self, binary=False, gnu=False):
 		return humanize.naturalsize(self.size)
+		
+	def __hash__(self):
+		if self.id == None:
+			raise ValueError('It cannot be hashed')
+		else:
+			print('The hash is: ')
+			return hash((self.id, self.title))		
 
 #	def _set_cover(self, value):
 #        self._SO_set_cover(value.encode('base64'))
