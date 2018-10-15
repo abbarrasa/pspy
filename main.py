@@ -33,9 +33,12 @@ def main(args):
     database = Database()
     database.connect(db_filename)
     database.createTables()
-    g = Game(title='Grand Thief Auto Liberty City1',description='GTA Liberty City',size=48306354,format='CSO',path='ISOS/GTA.zip')
+    g = Game(title='Grand Thief Auto Liberty City10',description='GTA Liberty City',size=48306354,format='CSO',path='ISOS/GTA.zip')
     size = g.humanReadableSize()
     print("El tamano es: " + size)
+    a = hash(g)
+    print(a)
+    print('The hash is: ')
     database.close()
 
 if __name__ == '__main__':

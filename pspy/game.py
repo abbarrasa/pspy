@@ -2,6 +2,8 @@ from sqlobject import *
 #from math import log
 #import os
 import humanize
+import sys
+assert (sys.maxsize & (sys.maxsize+1)) == 0 # checks that maxsize+1 is a power of 2
 
 
 class Game(SQLObject):
@@ -27,8 +29,7 @@ class Game(SQLObject):
 		if self.id == None:
 			raise ValueError('It cannot be hashed')
 		else:
-			print('The hash is: ')
-			return hash((self.id, self.title))		
+			return hash((self.id, self.title)) & sys.maxsize
 
 #	def _set_cover(self, value):
 #        self._SO_set_cover(value.encode('base64'))
