@@ -11,7 +11,7 @@ class Database(object):
         sqlhub.processConnection = connectionForURI(uri)
         print("Connected to: " + uri)
 
-    def createTables(self):
+    def createSchema(self):
         Game.createTable(ifNotExists=True)
 
     def close(self):

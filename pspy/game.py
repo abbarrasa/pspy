@@ -1,5 +1,4 @@
 from sqlobject import *
-#from math import log
 #import os
 import humanize
 import sys

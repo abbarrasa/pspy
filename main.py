@@ -32,7 +32,7 @@ def main(args):
     print("El fichero es: " + db_filename)
     database = Database()
     database.connect(db_filename)
-    database.createTables()
+    database.createSchema()
     g = Game(
         title='Grand Thief Auto Liberty City10',
         description='GTA Liberty City',
