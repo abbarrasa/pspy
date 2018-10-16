@@ -20,6 +20,9 @@ class Settings(object):
             defaults = {
                 'Database': {
                     'file': '~/.config/pspy/store.db'
+                },
+                'Thumbnails': {
+					'folder': '~/.config/pspy/thumbnails'
                 }
             }
             self.write(defaults)
