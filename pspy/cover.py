@@ -4,7 +4,7 @@ import os
 
 
 class Cover(object):
-	size = 128, 128
+	size = 326, 559
 	
 	def __init__(self, filename):
 		if (filename.find('://') > 0):
