@@ -1,8 +1,7 @@
 from sqlobject import *
 #import os
 import humanize
-import sys
-assert (sys.maxsize & (sys.maxsize+1)) == 0 # checks that maxsize+1 is a power of 2
+
 
 
 class Game(SQLObject):
