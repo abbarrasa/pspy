@@ -28,7 +28,7 @@ from pspy import Settings, Database, Game
 def main(args):
     settings = Settings()
 
-    db_filename = settings.read().get('Database', 'file')
+    db_filename = settings.read().get('General', 'db_file')
     print("El fichero es: " + db_filename)
     database = Database()
     database.connect(db_filename)
