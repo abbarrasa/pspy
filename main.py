@@ -42,7 +42,7 @@ def main(args):
     )
     size = g.humanReadableSize()
     print("El tamano es: " + size)
-    a = hash(g)
+    a = id(g.id)
     print(a)
     print('The hash is: ')
     database.close()
