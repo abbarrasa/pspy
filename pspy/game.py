@@ -24,13 +24,7 @@ class Game(SQLObject):
             raise ValueError(
                 '{0} is not a valid format'.format(value)
             )
-
-    def __hash__(self):
-        if self.id is None:
-            raise ValueError('It cannot be hashed because it has not id')
-        else:
-            return hash((self.id, self.title)) & sys.maxsize
-
+	
 #	def _set_cover(self, value):
 #        self._SO_set_cover(value.encode('base64'))
 
