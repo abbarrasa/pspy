@@ -18,11 +18,11 @@ class Settings(object):
             # Create the configuration file with default settings as it
             # doesn't exist yet
             defaults = {
-                'Database': {
-                    'file': '~/.config/pspy/store.db'
+                'General': {
+                    'db_file': '~/.config/pspy/store.db'
                 },
-                'Thumbnails': {
-					'folder': '~/.config/pspy/thumbnails'
+                    'Thumbnail': {
+                        'directory': '~/.config/pspy/thumbnails'
                 }
             }
             self.write(defaults)
