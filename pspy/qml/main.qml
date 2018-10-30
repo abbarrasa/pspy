@@ -11,6 +11,9 @@ ApplicationWindow {
     height: 480
     title: qsTr("Hello World")
 
+    property string status0: "Some text"
+    property string status1: "Some more text"
+
     //menu containing two menu items
     menuBar: MenuBar {
         Menu {
@@ -21,6 +24,7 @@ ApplicationWindow {
             }
             MenuItem {
                 text: qsTr("E&xit")
+                iconName: "application-exit"
                 onTriggered: Qt.quit();
             }
         }
@@ -29,14 +33,13 @@ ApplicationWindow {
             MenuItem {
                 action: Action {
                     id: aboutAction
-                    iconName: "help"
                     text: qsTr("&About")
+                    iconName: "help-about"
                     onTriggered: {
-                        aboutDialog.visible = true
-                        aboutDialog.open()
+                        AboutDialog.visible = true
+                        AboutDialog.open()
                     }
                 }
-                //onTriggered: console.log("About action triggered");
             }
         }
     }
@@ -53,7 +56,7 @@ ApplicationWindow {
     statusBar: StatusBar {
         RowLayout {
             anchors.fill: parent
-            Label { text: "Message" }
+            Label { text: status0 }
         }
     }
 }
