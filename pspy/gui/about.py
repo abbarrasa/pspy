@@ -1,14 +1,18 @@
-import sys
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'about.ui'
+#
+# Created by: PyQt5 UI code generator 5.5.1
+#
+# WARNING! All changes made in this file will be lost!
+
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QWidget, QAction
-from PyQt5.QtCore import QSize    
-from PyQt5.QtGui import QIcon
 
 class Ui_about(object):
     def setupUi(self, about):
         about.setObjectName("about")
         about.resize(389, 294)
-        about.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
+        self.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
         self.verticalLayout = QtWidgets.QVBoxLayout(about)
         self.verticalLayout.setObjectName("verticalLayout")
         self.stackedWidget = QtWidgets.QStackedWidget(about)
@@ -194,57 +198,14 @@ class Ui_about(object):
         self.license_button.setText(_translate("about", "Licence"))
         self.closeButton.setText(_translate("about", "Close"))
 
-
-class MainWindow(QMainWindow):
-    def __init__(self):
-        QMainWindow.__init__(self)
-
-        self.setMinimumSize(QSize(640, 480))
-        self.setWindowTitle("PSPy")
-        self.statusBar().showMessage('Message in statusbar.', 5000)
-
-        # Create exit action
-        exitAction = QAction(QIcon.fromTheme('application-exit'), 'E&xit', self)        
-        exitAction.setShortcut('Ctrl+Q')
-        exitAction.setStatusTip('Exit application')                
-        exitAction.triggered.connect(self.exitCall)
-        
-        # Create find action
-        findAction = QAction(QIcon.fromTheme('edit-find'), '&Find', self)
-        findAction.setShortcut('Ctrl+F')
-        findAction.setStatusTip('Find')        
-        findAction.triggered.connect(self.findCall)        
-        
-        # Create about action
-        aboutAction = QAction(QIcon.fromTheme('help-about'), 'About', self)        
-        aboutAction.setStatusTip('About PSPy')
-        aboutAction.triggered.connect(self.aboutCall)
-        
-        # Create menu bar and add action
-        menuBar = self.menuBar()
-        fileMenu = menuBar.addMenu('&File')
-        fileMenu.addAction(exitAction)
-        editMenu = menuBar.addMenu('&Edit')
-        editMenu.addAction(findAction)        
-        helpMenu = menuBar.addMenu('&Help')
-        helpMenu.addAction(aboutAction)
-    
-    def findCall(self):        
-        print('Find')
-
-    def aboutCall(self):
-        about = QtWidgets.QDialog(self)
-        ui = Ui_about()
-        ui.setupUi(about)
-        about.show()        
-        print('About')
-
-    def exitCall(self):
-        print('Exit app')
-
+import icons_rc
 
 if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
-    mainWin = MainWindow()
-    mainWin.show()
-    sys.exit( app.exec_() )
+    about = QtWidgets.QDialog()
+    ui = Ui_about()
+    ui.setupUi(about)
+    about.show()
+    sys.exit(app.exec_())
+
