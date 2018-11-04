@@ -8,11 +8,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_about(object):
+
+class UiAbout(object):
     def setupUi(self, about):
         about.setObjectName("about")
         about.resize(389, 294)
-        self.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
+        about.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
         self.verticalLayout = QtWidgets.QVBoxLayout(about)
         self.verticalLayout.setObjectName("verticalLayout")
         self.stackedWidget = QtWidgets.QStackedWidget(about)
@@ -39,16 +40,16 @@ class Ui_about(object):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.verticalLayout_6.addLayout(self.horizontalLayout_2)
-        self.wallch_version_label = QtWidgets.QLabel(self.page)
+        self.version_label = QtWidgets.QLabel(self.page)
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setBold(True)
         font.setWeight(75)
-        self.wallch_version_label.setFont(font)
-        self.wallch_version_label.setText("Wallch 0.0")
-        self.wallch_version_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.wallch_version_label.setObjectName("wallch_version_label")
-        self.verticalLayout_6.addWidget(self.wallch_version_label)
+        self.version_label.setFont(font)
+        self.version_label.setText("PSPy 0.0.1")
+        self.version_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.version_label.setObjectName("version_label")
+        self.verticalLayout_6.addWidget(self.version_label)
         self.label_3 = QtWidgets.QLabel(self.page)
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
@@ -130,16 +131,11 @@ class Ui_about(object):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.plain = QtWidgets.QPlainTextEdit(self.page_3)
         self.plain.setReadOnly(True)
-        self.plain.setPlainText("Wallch (Wallpaper Changer) is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.\n"
+        self.plain.setPlainText("PSPy is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.\n"
 "\n"
-"Wallch (Wallpaper Changer) is distributed in the hope that it will be useful,\n"
-"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-"GNU General Public License for more details.\n"
+"PSPy is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License\n"
-"along with Wallch (Wallpaper Changer); if not, write to the Free Software Foundation, Inc.,\n"
-"51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA\n"
+"You should have received a copy of the GNU General Public License along with PSPy; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 "\n"
 "For further information you can also visit http://www.gnu.org/licenses/gpl.html")
         self.plain.setObjectName("plain")
@@ -153,6 +149,7 @@ class Ui_about(object):
         self.about_button.setCheckable(True)
         self.about_button.setChecked(True)
         self.about_button.setAutoDefault(False)
+        self.about_button.clicked.connect(self.aboutAction)
         self.about_button.setObjectName("about_button")
         self.buttonGroup = QtWidgets.QButtonGroup(about)
         self.buttonGroup.setObjectName("buttonGroup")
@@ -162,12 +159,14 @@ class Ui_about(object):
         self.credits_button.setCheckable(True)
         self.credits_button.setAutoDefault(False)
         self.credits_button.setObjectName("credits_button")
+        self.credits_button.clicked.connect(self.creditsAction)
         self.buttonGroup.addButton(self.credits_button)
         self.horizontalLayout.addWidget(self.credits_button)
         self.license_button = QtWidgets.QPushButton(about)
         self.license_button.setCheckable(True)
         self.license_button.setAutoDefault(False)
         self.license_button.setObjectName("license_button")
+        self.license_button.clicked.connect(self.licenseAction)
         self.buttonGroup.addButton(self.license_button)
         self.horizontalLayout.addWidget(self.license_button)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -176,6 +175,7 @@ class Ui_about(object):
         self.closeButton.setCheckable(True)
         self.closeButton.setAutoDefault(False)
         self.closeButton.setObjectName("closeButton")
+        self.closeButton.clicked.connect(self.closeAction)
         self.buttonGroup.addButton(self.closeButton)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -187,9 +187,8 @@ class Ui_about(object):
 
     def retranslateUi(self, about):
         _translate = QtCore.QCoreApplication.translate
-        about.setWindowTitle(_translate("about", "About Wallch"))
-        self.label_3.setText(_translate("about", "Wallch allows your desktop\n"
-"wallpaper to change automatically "))
+        about.setWindowTitle(_translate("about", "About PSPy"))
+        self.label_3.setText(_translate("about", "PSPy allows you to manage your games"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("about", "Written by"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("about", "Translated by"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("about", "Artwork by"))
@@ -198,14 +197,25 @@ class Ui_about(object):
         self.license_button.setText(_translate("about", "Licence"))
         self.closeButton.setText(_translate("about", "Close"))
 
-import icons_rc
+    def aboutAction(self):
+        self.stackedWidget.setCurrentIndex(0)
+
+    def creditsAction(self):
+        self.stackedWidget.setCurrentIndex(1)
+
+    def licenseAction(self):
+        self.stackedWidget.setCurrentIndex(2)
+
+    def closeAction(self):
+        about.close()
+
+#import icons_rc
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     about = QtWidgets.QDialog()
-    ui = Ui_about()
+    ui = UiAbout()
     ui.setupUi(about)
     about.show()
     sys.exit(app.exec_())
-

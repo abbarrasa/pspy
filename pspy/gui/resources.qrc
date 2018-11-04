@@ -1,5 +1,5 @@
 <RCC>
-	<qresource prefix="/resources/icons">
+	<qresource prefix="/icons">
 		<file>pspy.png</file>
 	</qresource>
 </RCC>
