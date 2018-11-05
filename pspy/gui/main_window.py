@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
-from pspy.gui.about import Ui_About
-import pspy.resources
+from gui.about import Ui_About
+import resources
 
 
 class Ui_MainWindow(QObject):

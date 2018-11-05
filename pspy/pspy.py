@@ -22,9 +22,9 @@
 #
 #
 
-#from pspy import Settings, Database, Game
 from PyQt5 import QtWidgets
 from gui.main_window import Ui_MainWindow
+#import settings, database, game
 
 
 #def main(args):
