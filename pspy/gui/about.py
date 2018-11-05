@@ -12,7 +12,7 @@ class Ui_about(object):
     def setupUi(self, about):
         about.setObjectName("about")
         about.resize(389, 294)
-        self.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
+        about.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
         self.verticalLayout = QtWidgets.QVBoxLayout(about)
         self.verticalLayout.setObjectName("verticalLayout")
         self.stackedWidget = QtWidgets.QStackedWidget(about)
@@ -154,6 +154,7 @@ class Ui_about(object):
         self.about_button.setChecked(True)
         self.about_button.setAutoDefault(False)
         self.about_button.setObjectName("about_button")
+        self.about_button.clicked.connect(self.aboutAction)
         self.buttonGroup = QtWidgets.QButtonGroup(about)
         self.buttonGroup.setObjectName("buttonGroup")
         self.buttonGroup.addButton(self.about_button)
@@ -168,6 +169,7 @@ class Ui_about(object):
         self.license_button.setCheckable(True)
         self.license_button.setAutoDefault(False)
         self.license_button.setObjectName("license_button")
+        self.license_button.clicked.connect(self.licenseAction)
         self.buttonGroup.addButton(self.license_button)
         self.horizontalLayout.addWidget(self.license_button)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -176,6 +178,7 @@ class Ui_about(object):
         self.closeButton.setCheckable(True)
         self.closeButton.setAutoDefault(False)
         self.closeButton.setObjectName("closeButton")
+        self.closeButton.clicked.connect(self.closeAction)
         self.buttonGroup.addButton(self.closeButton)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -197,8 +200,21 @@ class Ui_about(object):
         self.credits_button.setText(_translate("about", "Credits"))
         self.license_button.setText(_translate("about", "Licence"))
         self.closeButton.setText(_translate("about", "Close"))
+    
+    def aboutAction(self):
+        self.page.show()
 
-import icons_rc
+    def creditsAction(self):
+        self.plain.show()
+        
+    def licenseAction(self):
+        self.page_3.show()
+        
+    def closeAction(self):
+        about.close()
+        
+
+#import icons_rc
 
 if __name__ == "__main__":
     import sys
