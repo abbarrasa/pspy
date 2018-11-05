@@ -24,14 +24,14 @@
 
 from PyQt5 import QtWidgets
 from gui.main_window import Ui_MainWindow
-#import settings, database, game
+from settings import Settings
 
 
-#def main(args):
-#    settings = Settings()
+def main(args):
+    settings = Settings()
 
-#    db_filename = settings.read().get('General', 'db_file')
-#    print("El fichero es: " + db_filename)
+    db_filename = settings.read().get('General', 'db_file')
+    print("El fichero es: " + db_filename)
 #    database = Database()
 #    database.connect(db_filename)
 #    database.createSchema()
@@ -55,6 +55,7 @@ if __name__ == '__main__':
     #sys.exit(main(sys.argv))
     app = QtWidgets.QApplication(sys.argv)
     mainWin = QtWidgets.QMainWindow()
+    m = main(sys.argv)
     ui = Ui_MainWindow()
     ui.setupUi(mainWin)
     mainWin.show()
