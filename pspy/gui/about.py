@@ -199,21 +199,21 @@ class Ui_About(QObject):
         self.credits_button.setText(_translate("about", "Credits"))
         self.license_button.setText(_translate("about", "Licence"))
         self.closeButton.setText(_translate("about", "Close"))
-    
-    @pyqtSlot( )    
+
+    @pyqtSlot()
     def aboutAction(self):
         print("About panel")
         self.stackedWidget.setCurrentIndex(0)
-        
-    @pyqtSlot( )        
+
+    @pyqtSlot()
     def creditsAction(self):
         self.stackedWidget.setCurrentIndex(1)
 
-    @pyqtSlot( )
+    @pyqtSlot()
     def licenseAction(self):
         self.stackedWidget.setCurrentIndex(2)
 
-    @pyqtSlot( )
+    @pyqtSlot()
     def closeAction(self, dialog):
         print("Close dialog")
         dialog.close()

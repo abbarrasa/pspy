@@ -52,11 +52,11 @@ def main(args):
 
 if __name__ == '__main__':
     import sys
-    #sys.exit(main(sys.argv))
+#    sys.exit(main(sys.argv))
     app = QtWidgets.QApplication(sys.argv)
     mainWin = QtWidgets.QMainWindow()
     m = main(sys.argv)
     ui = Ui_MainWindow()
     ui.setupUi(mainWin)
     mainWin.show()
-    sys.exit(app.exec_())        
+    sys.exit(app.exec_())
