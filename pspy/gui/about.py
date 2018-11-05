@@ -7,9 +7,11 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QObject, pyqtSlot
+import pspy.resources
 
 
-class UiAbout(object):
+class Ui_About(QObject):
     def setupUi(self, about):
         about.setObjectName("about")
         about.resize(389, 294)
@@ -33,7 +35,7 @@ class UiAbout(object):
         self.label.setMinimumSize(QtCore.QSize(71, 71))
         self.label.setMaximumSize(QtCore.QSize(71, 71))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap(":/icons/Pictures/wallch.png"))
+        self.label.setPixmap(QtGui.QPixmap(":/resources/icons/pspy.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout_2.addWidget(self.label)
@@ -149,7 +151,6 @@ class UiAbout(object):
         self.about_button.setCheckable(True)
         self.about_button.setChecked(True)
         self.about_button.setAutoDefault(False)
-        self.about_button.clicked.connect(self.aboutAction)
         self.about_button.setObjectName("about_button")
         self.about_button.clicked.connect(self.aboutAction)
         self.buttonGroup = QtWidgets.QButtonGroup(about)
@@ -176,7 +177,8 @@ class UiAbout(object):
         self.closeButton.setCheckable(True)
         self.closeButton.setAutoDefault(False)
         self.closeButton.setObjectName("closeButton")
-        self.closeButton.clicked.connect(self.closeAction)
+        self.closeButton.clicked.connect(
+            lambda checked, dialog=about: self.closeAction(dialog))
         self.buttonGroup.addButton(self.closeButton)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -198,25 +200,30 @@ class UiAbout(object):
         self.license_button.setText(_translate("about", "Licence"))
         self.closeButton.setText(_translate("about", "Close"))
     
+    @pyqtSlot( )    
     def aboutAction(self):
+        print("About panel")
         self.stackedWidget.setCurrentIndex(0)
-
+        
+    @pyqtSlot( )        
     def creditsAction(self):
         self.stackedWidget.setCurrentIndex(1)
 
+    @pyqtSlot( )
     def licenseAction(self):
         self.stackedWidget.setCurrentIndex(2)
 
-    def closeAction(self):
-        about.close()
+    @pyqtSlot( )
+    def closeAction(self, dialog):
+        print("Close dialog")
+        dialog.close()
 
-#import icons_rc
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     about = QtWidgets.QDialog()
-    ui = UiAbout()
+    ui = Ui_About()
     ui.setupUi(about)
     about.show()
     sys.exit(app.exec_())

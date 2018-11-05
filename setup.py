@@ -1,4 +1,5 @@
 from setuptools import find_packages, setup
+setup(name='pspy')
 
 
 __version__ = '0.0.1'
