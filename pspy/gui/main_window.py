@@ -5,7 +5,7 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon
 
 
-class MainWindow(QMainWindow):
+class UiMainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
@@ -43,10 +43,10 @@ class MainWindow(QMainWindow):
         print('Find')
 
     def aboutCall(self):
-        about = QtWidgets.QDialog(self)
-        ui = Ui_about()
+        about = QtWidgets.QDialog()
+        ui = UiAbout()
         ui.setupUi(about)
-        about.show()        
+        about.show()   
         print('About')
 
     def exitCall(self):
@@ -55,6 +55,6 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    mainWin = MainWindow()
+    mainWin = UiMainWindow()
     mainWin.show()
     sys.exit( app.exec_() )
