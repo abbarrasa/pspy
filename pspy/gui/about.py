@@ -11,14 +11,14 @@ from PyQt5.QtCore import QObject, pyqtSlot
 import resources
 
 
-class Ui_About(QObject):
-    def setupUi(self, about):
-        about.setObjectName("about")
-        about.resize(389, 294)
-        about.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
-        self.verticalLayout = QtWidgets.QVBoxLayout(about)
+class Ui_AboutDialog(QObject):
+    def setupUi(self, AboutDialog):
+        AboutDialog.setObjectName("AboutDialog")
+        AboutDialog.resize(389, 294)
+        AboutDialog.setWindowIcon(QtGui.QIcon.fromTheme('help-about'))
+        self.verticalLayout = QtWidgets.QVBoxLayout(AboutDialog)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.stackedWidget = QtWidgets.QStackedWidget(about)
+        self.stackedWidget = QtWidgets.QStackedWidget(AboutDialog)
         self.stackedWidget.setObjectName("stackedWidget")
         self.page = QtWidgets.QWidget()
         self.page.setObjectName("page")
@@ -147,24 +147,24 @@ class Ui_About(QObject):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setSpacing(1)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.about_button = QtWidgets.QPushButton(about)
+        self.about_button = QtWidgets.QPushButton(AboutDialog)
         self.about_button.setCheckable(True)
         self.about_button.setChecked(True)
         self.about_button.setAutoDefault(False)
         self.about_button.setObjectName("about_button")
         self.about_button.clicked.connect(self.aboutAction)
-        self.buttonGroup = QtWidgets.QButtonGroup(about)
+        self.buttonGroup = QtWidgets.QButtonGroup(AboutDialog)
         self.buttonGroup.setObjectName("buttonGroup")
         self.buttonGroup.addButton(self.about_button)
         self.horizontalLayout.addWidget(self.about_button)
-        self.credits_button = QtWidgets.QPushButton(about)
+        self.credits_button = QtWidgets.QPushButton(AboutDialog)
         self.credits_button.setCheckable(True)
         self.credits_button.setAutoDefault(False)
         self.credits_button.setObjectName("credits_button")
         self.credits_button.clicked.connect(self.creditsAction)
         self.buttonGroup.addButton(self.credits_button)
         self.horizontalLayout.addWidget(self.credits_button)
-        self.license_button = QtWidgets.QPushButton(about)
+        self.license_button = QtWidgets.QPushButton(AboutDialog)
         self.license_button.setCheckable(True)
         self.license_button.setAutoDefault(False)
         self.license_button.setObjectName("license_button")
@@ -173,24 +173,24 @@ class Ui_About(QObject):
         self.horizontalLayout.addWidget(self.license_button)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem4)
-        self.closeButton = QtWidgets.QPushButton(about)
+        self.closeButton = QtWidgets.QPushButton(AboutDialog)
         self.closeButton.setCheckable(True)
         self.closeButton.setAutoDefault(False)
         self.closeButton.setObjectName("closeButton")
         self.closeButton.clicked.connect(
-            lambda checked, dialog=about: self.closeAction(dialog))
+            lambda checked, dialog=AboutDialog: self.closeAction(dialog))
         self.buttonGroup.addButton(self.closeButton)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.retranslateUi(about)
+        self.retranslateUi(AboutDialog)
         self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(about)
+        QtCore.QMetaObject.connectSlotsByName(AboutDialog)
 
-    def retranslateUi(self, about):
+    def retranslateUi(self, AboutDialog):
         _translate = QtCore.QCoreApplication.translate
-        about.setWindowTitle(_translate("about", "About PSPy"))
+        AboutDialog.setWindowTitle(_translate("about", "About PSPy"))
         self.label_3.setText(_translate("about", "PSPy allows you to manage your games"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("about", "Written by"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("about", "Translated by"))
@@ -222,8 +222,8 @@ class Ui_About(QObject):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    about = QtWidgets.QDialog()
-    ui = Ui_About()
-    ui.setupUi(about)
-    about.show()
+    dialog = QtWidgets.QDialog()
+    ui = Ui_AboutDialog()
+    ui.setupUi(dialog)
+    dialog.show()
     sys.exit(app.exec_())

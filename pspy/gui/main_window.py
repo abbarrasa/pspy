@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
-from gui.about import Ui_About
+from gui.about import Ui_AboutDialog
+from gui.edit import Ui_EditDialog
 import resources
 
 
@@ -16,6 +17,13 @@ class Ui_MainWindow(QObject):
         self.statusbar.setObjectName("statusbar")
         self.statusbar.showMessage('Message in statusbar.', 5000)
         MainWindow.setStatusBar(self.statusbar)
+        
+        # Create new action
+        newAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('new'), '&New', MainWindow)
+        newAction.setShortcut('Ctrl+N')
+        newAction.setStatusTip('New game')
+        newAction.triggered.connect(
+            lambda checked, window=MainWindow: self.newCall(window))
 
         # Create exit action
         exitAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('application-exit'), 'E&xit', MainWindow)        
@@ -39,6 +47,7 @@ class Ui_MainWindow(QObject):
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setObjectName("menubar")
         fileMenu = self.menubar.addMenu('&File')
+        fileMenu.addAction(newAction)
         fileMenu.addAction(exitAction)
         editMenu = self.menubar.addMenu('&Edit')
         editMenu.addAction(findAction)
@@ -54,14 +63,21 @@ class Ui_MainWindow(QObject):
         MainWindow.setWindowTitle(_translate("MainWindow", "PSPy"))
 
     @pyqtSlot()
+    def newCall(self, window):
+        dialog = QtWidgets.QDialog(window)
+        Ui_EditDialog().setupUi(dialog)
+        dialog.show()
+        print('New')
+        
+    @pyqtSlot()
     def findCall(self):
         print('Find')
 
     @pyqtSlot()
     def aboutCall(self, window):
-        about = QtWidgets.QDialog(window)
-        Ui_About().setupUi(about)
-        about.show()
+        dialog = QtWidgets.QDialog(window)
+        Ui_AboutDialog().setupUi(dialog)
+        dialog.show()
         print('About')
 
     @pyqtSlot()
