@@ -3,7 +3,6 @@ from sqlobject import *
 import humanize
 
 
-
 class Game(SQLObject):
     title = StringCol(length=255, unique=True)
     description = StringCol(length=511, default=None)
@@ -20,9 +19,13 @@ class Game(SQLObject):
         if value in ['ISO', 'CSO', 'Eboot']:
             self._SO_set_format(value)
         else:
-            raise ValueError(
-                '{0} is not a valid format'.format(value)
-            )
+            raise ValueError('{0} is not a valid format'.format(value))
+            
+    def _set_size(self, value):
+		if value > 0:
+			self._SO_set_size(value)
+		else:
+			raise ValueError('Size must be greater than 0')
 	
 #	def _set_cover(self, value):
 #        self._SO_set_cover(value.encode('base64'))

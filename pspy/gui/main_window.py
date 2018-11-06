@@ -82,8 +82,7 @@ class Ui_MainWindow(QObject):
 
     @pyqtSlot()
     def exitCall(self):
-        import sys
-        sys.exit(0)
+        QtWidgets.QApplication.exit()
         print('Exit app')
 
 

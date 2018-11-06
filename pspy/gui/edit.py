@@ -78,13 +78,14 @@ class Ui_EditDialog(QObject):
         self.verticalLayout.addLayout(self.gridLayout)
         self.buttonBox = QtWidgets.QDialogButtonBox(EditDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Save)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
 
         self.retranslateUi(EditDialog)
         self.buttonBox.rejected.connect(EditDialog.reject)
-        self.buttonBox.accepted.connect(EditDialog.accept)
+        self.buttonBox.accepted.connect(
+            lambda dialog=EditDialog: self.saveAction(dialog))
         QtCore.QMetaObject.connectSlotsByName(EditDialog)
 
     def retranslateUi(self, EditDialog):
@@ -102,6 +103,10 @@ class Ui_EditDialog(QObject):
         self.commentLabel.setText(_translate("edit", "Comment:"))
         self.pathLabel.setText(_translate("edit", "Path"))
         self.coverLabel.setText(_translate("edit", "Cover"))
+        
+    @pyqtSlot()
+    def saveAction(self, dialog):
+        print("Save")
 
 
 if __name__ == "__main__":
