@@ -1,6 +1,5 @@
 from sqlobject import *
 #import os
-import humanize
 
 
 class Game(SQLObject):
@@ -12,34 +11,53 @@ class Game(SQLObject):
     size = IntCol()
     path = StringCol()
 
-    def humanReadableSize(self, binary=False, gnu=False):
-        return humanize.naturalsize(self.size)
+    def _set_title(self, value):
+        if value and value.strip():
+            self._SO_set_title(value.strip())
+        else:
+            raise ValueError('Title is required')
+
+    def _set_description(self, value):
+        if value and value.strip():
+            self._SO_set_description(value.strip())
 
     def _set_format(self, value):
-        if value in ['ISO', 'CSO', 'Eboot']:
+        if value and value in ['ISO', 'CSO', 'Eboot']:
             self._SO_set_format(value)
         else:
             raise ValueError('{0} is not a valid format'.format(value))
-            
+
     def _set_size(self, value):
-		if value > 0:
-			self._SO_set_size(value)
-		else:
-			raise ValueError('Size must be greater than 0')
-	
+        if value and value > 0:
+            self._SO_set_size(value)
+        else:
+            raise ValueError('Size must be greater than 0')
+
+    def _set_comment(self, value):
+        if value and value.strip():
+            self._SO_set_comment(value.strip())
+
+    def _set_path(self, value):
+        if value and value.strip():
+            self._SO_set_path(value.strip())
+        else:
+            raise ValueError('Path is required')
+
+    def _set_cover(self, value):
+        if value:
+            self._SO_set_cover(value)
+
 #	def _set_cover(self, value):
 #        self._SO_set_cover(value.encode('base64'))
 
 #    def _get_cover(self, value):
-#        return self._SO_get_cover().decode('base64')		
-		
+#        return self._SO_get_cover().decode('base64')
 #    def imageFilename(self):
 #        return 'covers/game-%s.jpg' % self.id
 
 #    def _get_cover(self):		
 #		with open(filename, 'wb') as output_file:
 #			output_file.write(ablob)
-		
 #        if not os.path.exists(self.imageFilename()):
 #            return None
 #        f = open(self.imageFilename())

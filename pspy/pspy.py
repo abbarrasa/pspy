@@ -25,6 +25,7 @@
 from PyQt5 import QtWidgets
 from gui.main_window import Ui_MainWindow
 from settings import Settings
+from database import Database
 
 
 def main(args):
@@ -32,9 +33,9 @@ def main(args):
 
     db_filename = settings.read().get('General', 'db_file')
     print("El fichero es: " + db_filename)
-#    database = Database()
-#    database.connect(db_filename)
-#    database.createSchema()
+    database = Database()
+    database.connect(db_filename)
+    database.createSchema()
 #    g = Game(
 #        title='Grand Thief Auto Liberty City10',
 #        description='GTA Liberty City',

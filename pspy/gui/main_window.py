@@ -17,7 +17,7 @@ class Ui_MainWindow(QObject):
         self.statusbar.setObjectName("statusbar")
         self.statusbar.showMessage('Message in statusbar.', 5000)
         MainWindow.setStatusBar(self.statusbar)
-        
+
         # Create new action
         newAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('new'), '&New', MainWindow)
         newAction.setShortcut('Ctrl+N')
@@ -26,7 +26,7 @@ class Ui_MainWindow(QObject):
             lambda checked, window=MainWindow: self.newCall(window))
 
         # Create exit action
-        exitAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('application-exit'), 'E&xit', MainWindow)        
+        exitAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('application-exit'), 'E&xit', MainWindow)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(self.exitCall)
@@ -68,7 +68,7 @@ class Ui_MainWindow(QObject):
         Ui_EditDialog().setupUi(dialog)
         dialog.show()
         print('New')
-        
+
     @pyqtSlot()
     def findCall(self):
         print('Find')

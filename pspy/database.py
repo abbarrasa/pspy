@@ -1,5 +1,5 @@
 from sqlobject import sqlhub, connectionForURI
-from pspy.game import Game
+from game import Game
 import os
 
 
