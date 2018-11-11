@@ -174,6 +174,7 @@ class Ui_AboutDialog(QObject):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem4)
         self.closeButton = QtWidgets.QPushButton(AboutDialog)
+        self.closeButton.setIcon(QtGui.QIcon.fromTheme('dialog-cancel'))
         self.closeButton.setCheckable(True)
         self.closeButton.setAutoDefault(False)
         self.closeButton.setObjectName("closeButton")

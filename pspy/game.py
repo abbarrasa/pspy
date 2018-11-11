@@ -12,14 +12,14 @@ class Game(SQLObject):
     path = StringCol()
 
     def _set_title(self, value):
-        if value and value.strip():
-            self._SO_set_title(value.strip())
+        if value:
+            self._SO_set_title(value)
         else:
             raise ValueError('Title is required')
 
     def _set_description(self, value):
-        if value and value.strip():
-            self._SO_set_description(value.strip())
+        if value:
+            self._SO_set_description(value)
 
     def _set_format(self, value):
         if value and value in ['ISO', 'CSO', 'Eboot']:
@@ -34,12 +34,12 @@ class Game(SQLObject):
             raise ValueError('Size must be greater than 0')
 
     def _set_comment(self, value):
-        if value and value.strip():
-            self._SO_set_comment(value.strip())
+        if value:
+            self._SO_set_comment(value)
 
     def _set_path(self, value):
-        if value and value.strip():
-            self._SO_set_path(value.strip())
+        if value:
+            self._SO_set_path(value)
         else:
             raise ValueError('Path is required')
 

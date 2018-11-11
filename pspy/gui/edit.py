@@ -9,6 +9,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from game import Game
+from cover import Cover
+from settings import Settings
 from util import Util
 
 
@@ -83,6 +85,11 @@ class Ui_EditDialog(QObject):
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
 
+        self.msg = QtWidgets.QMessageBox(EditDialog)
+        self.msg.setIcon(QtWidgets.QMessageBox.Critical)
+        self.msg.setWindowTitle("Error")
+        self.msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
         self.retranslateUi(EditDialog)
         self.buttonBox.rejected.connect(EditDialog.reject)
         self.buttonBox.accepted.connect(
@@ -111,15 +118,33 @@ class Ui_EditDialog(QObject):
 
     @pyqtSlot()
     def saveAction(self, dialog):
-        title = self.titleEdit.text()
-        description = self.descriptionEdit.text()
-        comment = self.commentEdit.toPlainText()
-        path = self.pathEdit.text()
-        cover = self.coverEdit.text()
-        format = str(self.formatCombo.currentText())
-        size = Util.toBytes("{0}{1}".format(str(self.sizeSpin.value()), str(self.unitCombo.currentText())))
-        Game(title=title, description=description, size=size, format=format, path=path, comment=comment)
-        print("Save")
+        try:
+            title = self.titleEdit.text().strip()
+            description = self.descriptionEdit.text().strip()
+            comment = self.commentEdit.toPlainText().strip()
+            path = self.pathEdit.text().strip()
+            filename = self.coverEdit.text().strip()
+            format = str(self.formatCombo.currentText())
+            size = Util.toBytes("{0}{1}".format(str(self.sizeSpin.value()), str(self.unitCombo.currentText())))
+            if filename:
+                generator = Cover(filename=filename)
+                cover = generator.raw()
+            else:
+                cover = None
+
+            g = Game(title=title, description=description, size=size, format=format, path=path, comment=comment, cover=cover)
+
+            #generator2 = Cover(raw=g.cover)
+            #settings = Settings()
+            #directory = settings.read().get('General', 'thumbnail_directory')
+            #generator2.save(str(id(g.id)), '.')
+
+            print("Save")
+            dialog.close()
+        except ValueError as err:
+            print(str(err))
+            self.msg.setText(str(err))
+            self.msg.show()
 
 
 if __name__ == "__main__":
