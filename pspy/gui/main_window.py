@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSql
-from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtCore import QObject
 from gui.about import Ui_AboutDialog
 from gui.edit import Ui_EditDialog
+from gui.menubar import Ui_MenuBar
 from gui.gameSqlModel import GameSqlModel
 #from game import Game
 from settings import Settings
@@ -22,42 +23,9 @@ class Ui_MainWindow(QObject):
         self.statusbar.showMessage('Message in statusbar.', 5000)
         MainWindow.setStatusBar(self.statusbar)
 
-        # Create new action
-        newAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('document-new'), '&New', MainWindow)
-        newAction.setShortcut('Ctrl+N')
-        newAction.setStatusTip('New game')
-        newAction.triggered.connect(
-            lambda checked, window=MainWindow: self.newCall(window))
-
-        # Create exit action
-        exitAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('application-exit'), 'E&xit', MainWindow)
-        exitAction.setShortcut('Ctrl+Q')
-        exitAction.setStatusTip('Exit application')
-        exitAction.triggered.connect(self.exitCall)
-
-        # Create find action
-        findAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('edit-find'), '&Find', MainWindow)
-        findAction.setShortcut('Ctrl+F')
-        findAction.setStatusTip('Find')
-        findAction.triggered.connect(self.findCall)
-
-        # Create about action
-        aboutAction = QtWidgets.QAction(QtGui.QIcon.fromTheme('help-about'), 'About', MainWindow)
-        aboutAction.setStatusTip('About PSPy')
-        aboutAction.triggered.connect(
-            lambda checked, window=MainWindow: self.aboutCall(window))
-
-        # Create menu bar and add action
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setObjectName("menubar")
-        fileMenu = self.menubar.addMenu('&File')
-        fileMenu.addAction(newAction)
-        fileMenu.addAction(exitAction)
-        editMenu = self.menubar.addMenu('&Edit')
-        editMenu.addAction(findAction)
-        helpMenu = self.menubar.addMenu('&Help')
-        helpMenu.addAction(aboutAction)
-        MainWindow.setMenuBar(self.menubar)
+        # Create menu bar
+        self.menubar = MenuBar(MainWindow)
+        MainWindow.setManuBar(self.menubar)
 
         # Create central widget
         centralWidget = QtWidgets.QWidget(MainWindow)
@@ -78,6 +46,10 @@ class Ui_MainWindow(QObject):
 #        self.model.setEditStrategy(QtSql.QSqlTableModel.OnFieldChange)
 #        self.model.select()
         self.tableView = QtWidgets.QTableView(centralWidget)
+        self.tableView.setAlternatingRowColors(True)
+        self.tableView.setSortingEnabled(True)
+        self.tableView.hideColumn(0)
+        self.tableView.hideColumn(4)
         self.tableView.setModel(self.model)
         gridLayout.addWidget(self.tableView, 1, 0, 1, 2)
         MainWindow.setCentralWidget(centralWidget)
@@ -103,28 +75,6 @@ class Ui_MainWindow(QObject):
         self.model.setHeaderData(6, QtCore.Qt.Horizontal, _translate("MainWindow", "Size"))
         self.model.setHeaderData(7, QtCore.Qt.Horizontal, _translate("MainWindow", "Path"))
 
-    @pyqtSlot()
-    def newCall(self, window):
-        dialog = QtWidgets.QDialog(window)
-        Ui_EditDialog().setupUi(dialog)
-        dialog.show()
-        print('New')
-
-    @pyqtSlot()
-    def findCall(self):
-        print('Find')
-
-    @pyqtSlot()
-    def aboutCall(self, window):
-        dialog = QtWidgets.QDialog(window)
-        Ui_AboutDialog().setupUi(dialog)
-        dialog.show()
-        print('About')
-
-    @pyqtSlot()
-    def exitCall(self):
-        QtWidgets.QApplication.exit()
-        print('Exit app')
 
 
 if __name__ == "__main__":
