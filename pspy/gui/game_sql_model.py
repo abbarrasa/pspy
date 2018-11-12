@@ -31,3 +31,6 @@ class GameSqlModel(QtSql.QSqlTableModel):
                 return Util.humanReadableSize(val)
 
         return val
+    
+    def flags(self, index):
+        return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable
