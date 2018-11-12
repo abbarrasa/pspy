@@ -37,6 +37,7 @@ class Ui_EditDialog(QObject):
         self.formatLabel.setObjectName("formatLabel")
         self.gridLayout.addWidget(self.formatLabel, 2, 0, 1, 1)
         self.formatCombo = QtWidgets.QComboBox(EditDialog)
+        self.formatCombo.addItems(['ISO', 'CSO', 'Eboot'])
         self.formatCombo.setObjectName("formatCombo")
         self.gridLayout.addWidget(self.formatCombo, 2, 1, 1, 2)
         self.descriptionEdit = QtWidgets.QLineEdit(EditDialog)
@@ -60,6 +61,7 @@ class Ui_EditDialog(QObject):
         self.sizeSpin.setObjectName("sizeSpin")
         self.gridLayout.addWidget(self.sizeSpin, 3, 1, 1, 1)
         self.unitCombo = QtWidgets.QComboBox(EditDialog)
+        self.unitCombo.addItems(['MiB', 'GiB'])
         self.unitCombo.setObjectName("unitCombo")
         self.gridLayout.addWidget(self.unitCombo, 3, 2, 1, 1)
         self.commentLabel = QtWidgets.QLabel(EditDialog)
@@ -110,11 +112,6 @@ class Ui_EditDialog(QObject):
         self.commentLabel.setText(_translate("edit", "Comment:"))
         self.pathLabel.setText(_translate("edit", "Path:"))
         self.coverLabel.setText(_translate("edit", "Cover:"))
-        for choice in ['ISO', 'CSO', 'Eboot']:
-            self.formatCombo.addItem(choice)
-
-        for choice in ['MiB', 'GiB']:
-            self.unitCombo.addItem(choice)
 
     @pyqtSlot()
     def saveAction(self, dialog):
