@@ -7,36 +7,46 @@ import resources
 
 
 class Cover(object):
-    im = None
-
-    def __init__(self, filename):
+    def open(self, filename):
         print("Vamos a guardar filename: " + filename)
         if filename:
             if filename.find('://') > 0:
-                im = Image.open(urlopen(filename))
+                return Image.open(urlopen(filename))
             else:
-                im = Image.open(filename)
-                im.thumbnail((326, 559), Image.ANTIALIAS)
+                return Image.open(filename)
         else:
             raise ValueError("File name of picture is required")
 
-        self.im = im
+    def generateThumbnail(self, infile, outfile):
+        #background = Image.new('L', (342, 582), 0)
+        #background = Image.new('RGBA', (342, 582), (255, 0, 0, 0))
+        #print("Create background")
+        #self.im.putalpha(background)
+        #print("SetAlpha")
+        #background.paste(self.im, (2, 11), self.im)
+        #print("Paste background")
 
-    def generateThumbnail(self, outfile):
-        background = Image.new('RGBA', (342, 582), (255, 0, 0, 0))
-        print("Create background")
-        background.paste(self.im, (2, 11), self.im)
-        print("Paste background")
-        foreground = Image.open(":/resources/templates/psp-game-cover-template.png")
-        background.paste(foreground, (0, 0), foreground)
-        print("Paste foreground")
+        im = self.open(infile)
+        im.convert("RGBA")
+        im.thumbnail((326, 559), Image.ANTIALIAS)
+        background = Image.new('RGBA', (342, 582), (255, 255, 255, 0))
+        background.paste(im, (2, 11))
         background.show()
+        print("Create background")
+        foreground = Image.open("./resources/templates/psp-game-cover-template.png")
+        print("Open foreground")
+        #background.paste(self.im, (2, 11), self.im)
+        thumbnail = Image.alpha_composite(background, foreground)
+        print("Paste foreground")
+        thumbnail.show()
+
+        thumbnail.save(outfile + ".png", 'PNG')
         print("Show")
         try:
             settings = Settings()
-            directory = settings.read().get('General', 'thumbnail_directory')            
+            directory = settings.read().get('General', 'thumbnail_directory')
             filename = os.path.join(directory, outfile + ".png")
-            background.save(filename, 'PNG')
+            thumbnail.save(filename, 'PNG')
             print("Saving")
         except IOError:
             print("Cannot create thumbnail")

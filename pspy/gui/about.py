@@ -152,7 +152,7 @@ class Ui_AboutDialog(QObject):
         self.about_button.setChecked(True)
         self.about_button.setAutoDefault(False)
         self.about_button.setObjectName("about_button")
-        self.about_button.clicked.connect(self.aboutAction)
+        self.about_button.clicked.connect(self.aboutCall)
         self.buttonGroup = QtWidgets.QButtonGroup(AboutDialog)
         self.buttonGroup.setObjectName("buttonGroup")
         self.buttonGroup.addButton(self.about_button)
@@ -161,14 +161,14 @@ class Ui_AboutDialog(QObject):
         self.credits_button.setCheckable(True)
         self.credits_button.setAutoDefault(False)
         self.credits_button.setObjectName("credits_button")
-        self.credits_button.clicked.connect(self.creditsAction)
+        self.credits_button.clicked.connect(self.creditsCall)
         self.buttonGroup.addButton(self.credits_button)
         self.horizontalLayout.addWidget(self.credits_button)
         self.license_button = QtWidgets.QPushButton(AboutDialog)
         self.license_button.setCheckable(True)
         self.license_button.setAutoDefault(False)
         self.license_button.setObjectName("license_button")
-        self.license_button.clicked.connect(self.licenseAction)
+        self.license_button.clicked.connect(self.licenseCall)
         self.buttonGroup.addButton(self.license_button)
         self.horizontalLayout.addWidget(self.license_button)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -179,7 +179,7 @@ class Ui_AboutDialog(QObject):
         self.closeButton.setAutoDefault(False)
         self.closeButton.setObjectName("closeButton")
         self.closeButton.clicked.connect(
-            lambda checked, dialog=AboutDialog: self.closeAction(dialog))
+            lambda checked, dialog=AboutDialog: self.closeCall(dialog))
         self.buttonGroup.addButton(self.closeButton)
         self.horizontalLayout.addWidget(self.closeButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -202,20 +202,20 @@ class Ui_AboutDialog(QObject):
         self.closeButton.setText(_translate("about", "Close"))
 
     @pyqtSlot()
-    def aboutAction(self):
+    def aboutCall(self):
         print("About panel")
         self.stackedWidget.setCurrentIndex(0)
 
     @pyqtSlot()
-    def creditsAction(self):
+    def creditsCall(self):
         self.stackedWidget.setCurrentIndex(1)
 
     @pyqtSlot()
-    def licenseAction(self):
+    def licenseCall(self):
         self.stackedWidget.setCurrentIndex(2)
 
     @pyqtSlot()
-    def closeAction(self, dialog):
+    def closeCall(self, dialog):
         print("Close dialog")
         dialog.close()
 

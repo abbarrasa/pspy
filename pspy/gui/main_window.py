@@ -24,8 +24,7 @@ class Ui_MainWindow(QObject):
         MainWindow.setStatusBar(self.statusbar)
 
         # Create menu bar
-        self.menubar = MenuBar(MainWindow)
-        MainWindow.setManuBar(self.menubar)
+        self.setupMenuBar(MainWindow)
 
         # Create central widget
         centralWidget = QtWidgets.QWidget(MainWindow)
@@ -74,6 +73,12 @@ class Ui_MainWindow(QObject):
         self.model.setHeaderData(5, QtCore.Qt.Horizontal, _translate("MainWindow", "Format"))
         self.model.setHeaderData(6, QtCore.Qt.Horizontal, _translate("MainWindow", "Size"))
         self.model.setHeaderData(7, QtCore.Qt.Horizontal, _translate("MainWindow", "Path"))
+
+    def setupMenuBar(self, MainWindow):
+        menubar = QtWidgets.QMenuBar(MainWindow)
+        ui = Ui_MenuBar()
+        ui.setupUi(menubar)
+        MainWindow.setMenuBar(menubar)
 
 
 

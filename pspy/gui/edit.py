@@ -95,7 +95,7 @@ class Ui_EditDialog(QObject):
         self.retranslateUi(EditDialog)
         self.buttonBox.rejected.connect(EditDialog.reject)
         self.buttonBox.accepted.connect(
-            lambda dialog=EditDialog: self.saveAction(dialog))
+            lambda dialog=EditDialog: self.saveCall(dialog))
         QtCore.QMetaObject.connectSlotsByName(EditDialog)
 
     def retranslateUi(self, EditDialog):
@@ -114,7 +114,7 @@ class Ui_EditDialog(QObject):
         self.coverLabel.setText(_translate("edit", "Cover:"))
 
     @pyqtSlot()
-    def saveAction(self, dialog):
+    def saveCall(self, dialog):
         try:
             title = self.titleEdit.text().strip()
             description = self.descriptionEdit.text().strip()
@@ -125,8 +125,8 @@ class Ui_EditDialog(QObject):
             size = Util.toBytes("{0}{1}".format(str(self.sizeSpin.value()), str(self.unitCombo.currentText())))
             g = Game(title=title, description=description, size=size, format=format, path=path, comment=comment)
             if filename:
-                Cover(filename).generateThumbnail(str(id(g.id)))
-            
+                Cover().generateThumbnail(filename, str(id(g.id)))
+
 
             #generator2 = Cover(raw=g.cover)
             #settings = Settings()
