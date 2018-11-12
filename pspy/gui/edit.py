@@ -10,7 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
 from game import Game
 from cover import Cover
-from settings import Settings
+#from settings import Settings
 from util import Util
 
 
@@ -123,13 +123,10 @@ class Ui_EditDialog(QObject):
             filename = self.coverEdit.text().strip()
             format = str(self.formatCombo.currentText())
             size = Util.toBytes("{0}{1}".format(str(self.sizeSpin.value()), str(self.unitCombo.currentText())))
+            g = Game(title=title, description=description, size=size, format=format, path=path, comment=comment)
             if filename:
-                generator = Cover(filename=filename)
-                cover = generator.raw()
-            else:
-                cover = None
-
-            g = Game(title=title, description=description, size=size, format=format, path=path, comment=comment, cover=cover)
+                Cover(filename).generateThumbnail(str(id(g.id)))
+            
 
             #generator2 = Cover(raw=g.cover)
             #settings = Settings()
