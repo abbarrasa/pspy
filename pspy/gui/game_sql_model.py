@@ -12,22 +12,22 @@ class GameSqlModel(QtSql.QSqlTableModel):
     def data(self, item, role):
         val = QtSql.QSqlTableModel.data(self, item, role)
         if role == QtCore.Qt.DisplayRole:
-            if item.column() == 4:
-                return ""
+            #if item.column() == 4:
+            #    return ""
                 #try:
                 #    return '{:.4f}'.format(round(float(val), 4))
                 #except ValueError:
                 #    pass
-            if item.column() == 6:
+            if item.column() == 5:
                 return Util.humanReadableSize(val)
         if role == QtCore.Qt.EditRole:
-            if item.column() == 4:
-                return ""
+            #if item.column() == 4:
+            #    return ""
                 #try:
                 #    return float(val)
                 #except ValueError:
                 #    pass
-            if item.column() == 6:
+            if item.column() == 5:
                 return Util.humanReadableSize(val)
 
         return val
