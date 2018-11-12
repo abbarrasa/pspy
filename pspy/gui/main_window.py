@@ -3,7 +3,7 @@ from PyQt5.QtCore import QObject
 from gui.about import Ui_AboutDialog
 from gui.edit import Ui_EditDialog
 from gui.menubar import Ui_MenuBar
-from gui.gameSqlModel import GameSqlModel
+from gui.game_sql_model import GameSqlModel
 #from game import Game
 from settings import Settings
 import os
