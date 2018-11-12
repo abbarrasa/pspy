@@ -39,13 +39,13 @@ class Cover(object):
         thumbnail = Image.alpha_composite(background, foreground)
         print("Paste foreground")
         thumbnail.show()
-
-        thumbnail.save(outfile + ".png", 'PNG')
         print("Show")
         try:
             settings = Settings()
             directory = settings.read().get('General', 'thumbnail_directory')
-            filename = os.path.join(directory, outfile + ".png")
+            path = os.path.expanduser(directory)
+            os.makedirs(path, exist_ok=True)
+            filename = os.path.join(path, outfile + ".thm")
             thumbnail.save(filename, 'PNG')
             print("Saving")
         except IOError:
