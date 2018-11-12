@@ -1,5 +1,6 @@
 from PIL import Image
 from urllib.request import urlopen
+from settings import Settings
 import os
 import io
 import resources
@@ -21,7 +22,7 @@ class Cover(object):
 
         self.im = im
 
-    def generateThumbnail(self, outfile, directory):
+    def generateThumbnail(self, outfile):
         background = Image.new('RGBA', (342, 582), (255, 0, 0, 0))
         print("Create background")
         background.paste(self.im, (2, 11), self.im)
@@ -32,6 +33,8 @@ class Cover(object):
         background.show()
         print("Show")
         try:
+            settings = Settings()
+            directory = settings.read().get('General', 'thumbnail_directory')            
             filename = os.path.join(directory, outfile + ".png")
             background.save(filename, 'PNG')
             print("Saving")
