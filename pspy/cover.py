@@ -1,10 +1,11 @@
 from PIL import Image
+from pkg_resources import resource_filename
 from urllib.request import urlopen
 from settings import Settings
 import os
 import io
-import resources
 
+template_file = resource_filename('pspy', 'resources/templates/psp-game-cover-template.png')
 
 class Cover(object):
     def open(self, filename):
@@ -33,7 +34,7 @@ class Cover(object):
         background.paste(im, (2, 11))
         background.show()
         print("Create background")
-        foreground = Image.open("./resources/templates/psp-game-cover-template.png")
+        foreground = Image.open(template_file)
         print("Open foreground")
         #background.paste(self.im, (2, 11), self.im)
         thumbnail = Image.alpha_composite(background, foreground)
