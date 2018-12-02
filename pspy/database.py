@@ -1,5 +1,6 @@
 from sqlobject import sqlhub, connectionForURI
 from game import Game
+from format import Format
 import os
 
 
@@ -15,6 +16,7 @@ class Database(object):
         return self.path_to_db
 
     def createSchema(self):
+        Format.createTable(ifNotExists=True)
         Game.createTable(ifNotExists=True)
 
     def close(self):

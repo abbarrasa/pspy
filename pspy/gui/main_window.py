@@ -1,7 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSql
 from PyQt5.QtCore import QObject
-from gui.about import Ui_AboutDialog
-from gui.edit import Ui_EditDialog
 from gui.menubar import Ui_MenuBar
 from gui.game_sql_model import GameSqlModel
 #from game import Game
@@ -41,15 +39,13 @@ class Ui_MainWindow(QObject):
         db.setDatabaseName(path_to_db)
 
         self.model = GameSqlModel()
-#        self.model.setTable("Game")
-#        self.model.setEditStrategy(QtSql.QSqlTableModel.OnFieldChange)
-#        self.model.select()
         self.tableView = QtWidgets.QTableView(centralWidget)
         self.tableView.setAlternatingRowColors(True)
         self.tableView.setSortingEnabled(True)
-        self.tableView.hideColumn(0)
+        #self.tableView.hideColumn(0)
 #        self.tableView.hideColumn(4)
         self.tableView.setModel(self.model)
+        self.tableView.setItemDelegate(QtSql.QSqlRelationalDelegate(self.tableView));
         gridLayout.addWidget(self.tableView, 1, 0, 1, 2)
         MainWindow.setCentralWidget(centralWidget)
 

@@ -23,7 +23,7 @@
 #
 
 from PyQt5 import QtWidgets
-from gui.main_window import Ui_MainWindow
+from gui.main_window import *
 from settings import Settings
 from database import Database
 

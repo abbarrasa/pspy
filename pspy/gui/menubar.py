@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QObject, pyqtSlot
-from gui.edit import Ui_EditDialog
 from gui.about import Ui_AboutDialog
+from gui.edit import Ui_EditDialog
+
 
 
 class Ui_MenuBar(QObject):

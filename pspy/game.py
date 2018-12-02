@@ -21,11 +21,11 @@ class Game(SQLObject):
         if value:
             self._SO_set_description(value)
 
-    def _set_format(self, value):
-        if value and value in ['ISO', 'CSO', 'Eboot']:
-            self._SO_set_format(value)
-        else:
-            raise ValueError('{0} is not a valid format'.format(value))
+#    def _set_format(self, value):
+#        if value and value in ['ISO', 'CSO', 'Eboot']:
+#            self._SO_set_format(value)
+#        else:
+#            raise ValueError('{0} is not a valid format'.format(value))
 
     def _set_size(self, value):
         if value and value > 0:
