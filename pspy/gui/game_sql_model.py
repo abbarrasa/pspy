@@ -2,13 +2,15 @@ from PyQt5 import QtCore, QtSql, QtWidgets
 from util import Util
 
 
-class GameSqlModel(QtSql.QSqlTableModel):
+# class GameSqlModel(QtSql.QSqlTableModel):
+class GameSqlModel(QtSql.QSqlRelationalTableModel):
     def __init__(self, parent=None):
-        QtSql.QSqlTableModel.__init__(self, parent=parent)
+#        QtSql.QSqlTableModel.__init__(self, parent=parent)
+        QtSql.QSqlRelationalTableModel.__init__(self, parent=parent)
         self.setTable("Game")
         self.setRelation(4, QtSql.QSqlRelation("format", "id", "name"));
         #self.setEditStrategy(QtSql.QSqlTableModel.OnFieldChange)
-        self.setEditStrategy(QtSql.QSqlTableModel.OnRowChange)        
+        self.setEditStrategy(QtSql.QSqlTableModel.OnRowChange)
         self.select()
 
     def data(self, item, role):
