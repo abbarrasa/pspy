@@ -31,12 +31,21 @@ class Ui_MainWindow(QObject):
         gridLayout = QtWidgets.QGridLayout(centralWidget)
         gridLayout.setObjectName("gridLayout")
         gridLayout.addWidget(self.refreshTablePushButton, 0, 0, 1, 1)
+        
+        self.msg = QtWidgets.QMessageBox(EditDialog)
+        self.msg.setIcon(QtWidgets.QMessageBox.Critical)
+        self.msg.setWindowTitle("Error")
+        self.msg.setStandardButtons(QtWidgets.QMessageBox.Ok)        
 
         db = QtSql.QSqlDatabase.addDatabase("QSQLITE")
         settings = Settings()
         db_filename = settings.read().get('General', 'db_file')
         path_to_db = os.path.expanduser(db_filename)
         db.setDatabaseName(path_to_db)
+        if not db.open():
+            print("Cannot Connect")
+            self.msg.setText("Cannot Connect")
+            self.msg.show()
 
         self.model = GameSqlModel()
         self.tableView = QtWidgets.QTableView(centralWidget)
